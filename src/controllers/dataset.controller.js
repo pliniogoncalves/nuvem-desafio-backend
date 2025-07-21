@@ -3,6 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import csv from 'csv-parser';
+import PDFParser from "pdf2json";
 
 const prisma = new PrismaClient();
 const storage = multer.diskStorage({
@@ -44,6 +45,31 @@ const processCsvFile = (filePath, datasetId) => {
   });
 };
 
+const processPdfFile = (filePath, datasetId) => {
+  return new Promise((resolve, reject) => {
+    const pdfParser = new PDFParser(this, 1);
+
+    pdfParser.on("pdfParser_dataError", errData => reject(errData.parserError));
+    pdfParser.on("pdfParser_dataReady", async pdfData => {
+      try {
+        const fullText = pdfParser.getRawTextContent();
+        await prisma.record.create({
+          data: {
+            datasetId,
+            jsonData: { text: fullText }
+          }
+        });
+        fs.unlinkSync(filePath);
+        resolve();
+      } catch (dbError) {
+        reject(dbError);
+      }
+    });
+
+    pdfParser.loadPDF(filePath);
+  });
+};
+
 export const uploadDataset = async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'Nenhum arquivo enviado.' });
@@ -61,7 +87,10 @@ export const uploadDataset = async (req, res) => {
 
     if (fileExt === '.csv') {
       await processCsvFile(req.file.path, dataset.id);
+    } else if (fileExt === '.pdf') {
+      await processPdfFile(req.file.path, dataset.id);
     }
+
     return res.status(201).json({
       message: 'Dataset enviado e processado com sucesso!',
       dataset,
