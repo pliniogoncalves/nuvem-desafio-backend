@@ -1,8 +1,9 @@
 {
   "name": "nuvem-desafio-backend",
   "version": "1.0.0",
-  "description": "[cite_start]API RESTful desenvolvida como parte do processo seletivo para a vaga de Desenvolvedor Backend [cite: 3][cite_start], focada em ingestão de documentos, autenticação de usuários e simulação de buscas com IA[cite: 5].",
+  "description": "Backend for Nuvem Desafio",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,7 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.12.0",
+    "bcryptjs": "^3.0.2",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "pg": "^8.16.3"
   },
   "devDependencies": {
