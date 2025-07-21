@@ -49,8 +49,8 @@ O banco de dados relacional foi modelado com as seguintes tabelas:
 1. **Clone o repositório:**
 
    ```bash
-   git clone SUA_URL_DO_REPOSITORIO_AQUI.git
-   cd nome-do-repositorio
+   git clone https://github.com/pliniogoncalves/nuvem-desafio-backend.git
+   cd nuvem-desafio-backend
    ```
 
 2. **Crie o arquivo de variáveis de ambiente:**
@@ -78,6 +78,16 @@ O banco de dados relacional foi modelado com as seguintes tabelas:
    ```bash
    docker-compose exec app npx prisma migrate dev
    ```
+
+## 🧪 Rodando os Testes Automatizados
+
+Certifique-se de que os containers do Docker estão em execução. Então, no seu terminal local, rode o comando:
+
+```bash
+npm test
+```
+
+Este comando executará o Jest e rodará todos os arquivos de teste encontrados na pasta `/tests`
 
 5. A aplicação estará disponível em [http://localhost:3000](http://localhost:3000).
 
