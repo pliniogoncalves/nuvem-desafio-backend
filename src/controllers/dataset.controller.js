@@ -79,6 +79,7 @@ export const uploadDataset = async (req, res) => {
     const dataset = await prisma.dataset.create({
       data: {
         name: req.file.originalname,
+        size: req.file.size,
         userId: req.userId,
       },
     });

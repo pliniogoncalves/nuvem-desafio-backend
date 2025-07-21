@@ -27,6 +27,7 @@ model User {
 model Dataset {
   id        String   @id @default(uuid())
   name      String
+  size      Int
   createdAt DateTime @default(now()) @map("criado_em")
   user      User     @relation(fields: [userId], references: [id])
   userId    String   @map("usuario_id")
