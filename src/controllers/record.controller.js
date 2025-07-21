@@ -10,7 +10,12 @@ export const searchRecords = async (req, res) => {
 
   try {
     const records = await prisma.$queryRaw`
-      SELECT r.id, r.dados_json, r.criado_em, r.dataset_id FROM "records" AS r
+      SELECT 
+        r.id, 
+        r.dados_json AS "jsonData", -- A CORREÇÃO ESTÁ AQUI
+        r.criado_em AS "createdAt", 
+        r.dataset_id AS "datasetId" 
+      FROM "records" AS r
       INNER JOIN "datasets" AS d ON r.dataset_id = d.id
       WHERE d.usuario_id = ${req.userId} AND r.dados_json::text ILIKE ${`%${query}%`}
     `;
