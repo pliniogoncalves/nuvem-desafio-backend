@@ -1,6 +1,7 @@
 import express from 'express';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
+import datasetRoutes from './routes/dataset.routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +14,7 @@ app.get('/', (req, res) => {
 
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
+app.use('/datasets', datasetRoutes);
 
 
 app.listen(PORT, () => {
