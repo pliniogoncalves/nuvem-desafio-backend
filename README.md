@@ -91,20 +91,19 @@ A documentação completa e interativa dos endpoints, gerada com Swagger, está 
 
 ```mermaid
 graph TD
-    A[Usuário] --> B{API RESTful (Express)};
-    B --> C{Middleware de JWT};
-    C -- Token Válido --> D[Controller];
-    D --> E{Prisma ORM};
-    E <--> F[(PostgreSQL DB)];
-    D -- Resposta --> B;
-    B --> A;
+    A[Usuário] --> B[API_RESTful_Express]
+    B --> C[Middleware_JWT]
+    C --> D[Controller]
+    D --> E[Prisma_ORM]
+    E --> F[PostgreSQL_DB]
+    D --> B
+    B --> A
 
-    subgraph "Fluxo de Upload"
-        U1[Usuário com Arquivo] --> B;
-        C --> UC{Controller de Dataset};
-        UC --> M{Multer};
-        M --> S[Salva Arquivo];
-        UC --> P{Processa Arquivo};
-        P --> E;
+    subgraph Fluxo_de_Upload
+        U1[Usuário_com_Arquivo] --> B
+        C --> UC[Controller_Dataset]
+        UC --> M[Multer]
+        M --> S[Salva_Arquivo]
+        UC --> P[Processa_Arquivo]
+        P --> E
     end
-```
