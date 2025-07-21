@@ -8,6 +8,7 @@ API RESTful desenvolvida como parte do processo seletivo para a vaga de Desenvol
 * [Diferenciais Implementados](#-diferenciais-implementados)
 * [Modelagem de Dados](#-modelagem-de-dados)
 * [Como Executar o Projeto](#-como-executar-o-projeto)
+* [Rodando os Testes Automatizados](#-rodando-os-testes-automatizados)
 * [Documentação da API](#-documentação-da-api)
 * [Fluxograma da Aplicação](#-fluxograma-da-aplicação)
 
@@ -25,9 +26,10 @@ API RESTful desenvolvida como parte do processo seletivo para a vaga de Desenvol
 ## 🚀 Diferenciais Implementados
 
 * [x] Endpoint `/me` para retorno de informações do usuário autenticado.
-* [x] Testes automatizados com Jest.
+* [x] Testes automatizados com Jest (cobertura de 100% dos endpoints).
 * [x] Fluxograma visual explicativo da arquitetura da aplicação.
 * [x] Interface do Swagger utilizada para consumo e teste dos endpoints.
+* [x] **Integração com IA externa (Hugging Face)** para sumarização de texto.
 
 ## 📦 Modelagem de Dados
 
@@ -63,6 +65,10 @@ O banco de dados relacional foi modelado com as seguintes tabelas:
    DB_PASSWORD=docker
    DB_NAME=desafio_db
    JWT_SECRET="seu_segredo_super_secreto"
+
+   # Opcional: Para usar a IA real da Hugging Face
+   # Se esta linha for comentada ou removida, o sistema usará a IA Mock.
+   HUGGINGFACE_API_TOKEN="hf_SUA_CHAVE_AQUI"
    ```
 
 3. **Inicie os containers com Docker Compose:**
@@ -78,6 +84,7 @@ O banco de dados relacional foi modelado com as seguintes tabelas:
    ```bash
    docker-compose exec app npx prisma migrate dev
    ```
+A aplicação estará disponível em `http://localhost:3000`.
 
 ## 🧪 Rodando os Testes Automatizados
 
@@ -88,8 +95,6 @@ npm test
 ```
 
 Este comando executará o Jest e rodará todos os arquivos de teste encontrados na pasta `/tests`
-
-5. A aplicação estará disponível em [http://localhost:3000](http://localhost:3000).
 
 ## 📖 Documentação da API
 
